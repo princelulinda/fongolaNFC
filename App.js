@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import NfcManager, {NfcTech} from 'react-native-nfc-manager';
+import NavigationScreen from './src/navigation/NavigationScreen';
+import Onbording from './src/screens/Onbording/Onbording';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './src/screens/HomeScreen/HomeScreen';
+import NFCScreen from './src/component/test';
+import WelcomeScreen from './src/screens/WelcomeScreen/WelcomeScreen';
 
-export default function App() {
+
+
+// NfcManager.start();
+const Stack = createStackNavigator()
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+
+<NavigationScreen/>
   );
 }
+export default App;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+
+
+// 

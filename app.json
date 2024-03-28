@@ -1,5 +1,16 @@
 {
   "expo": {
+      "plugins": [
+        [
+          "react-native-nfc-manager",
+          {
+            "nfcPermission": "Custom permission message",
+            "selectIdentifiers": ["A0000002471001"],
+            "systemCodes": ["8008"],
+            "includeNdefEntitlement": false,
+          }
+        ]
+      ],
     "name": "fongolaNFC",
     "slug": "fongolaNFC",
     "version": "1.0.0",
@@ -7,10 +18,11 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "blue"
     },
+   
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -19,12 +31,21 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage": "./assets/logo.png",
+        "backgroundColor": "blue"
+      },
+      "permissions": [
+        "android.permission.NFC"
+      ],
+      "package": "com.crespoprince.fongolaNFC"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f11a38ad-0009-442b-af56-db1f97bd3255"
+      }
     }
   }
 }
