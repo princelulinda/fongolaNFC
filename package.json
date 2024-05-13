@@ -1,17 +1,26 @@
 {
   "name": "ReactNative",
-  "version": "0.0.1",
+  "version": "0.0.np1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
+    "android": "react-native run-android ",
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest"
   },
   "dependencies": {
+    "@dotlottie/react-player": "^1.6.19",
+    "@lottiefiles/react-lottie-player": "^3.5.3",
+    "@react-native-masked-view/masked-view": "^0.3.1",
+    "@react-navigation/drawer": "^6.6.15",
+    "@react-navigation/native": "^6.1.17",
+    "@react-navigation/stack": "^6.3.29",
     "react": "18.2.0",
-    "react-native": "0.74.1"
+    "react-native": "0.74.1",
+    "react-native-audio": "^4.3.0",
+    "react-native-nfc-manager": "^3.14.14",
+    "react-native-raw-bottom-sheet": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
