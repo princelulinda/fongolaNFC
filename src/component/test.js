@@ -1,58 +1,63 @@
-import React, { useEffect, useRef } from 'react';
-import { ActivityIndicator, Text } from 'react-native';
-import { Alert,  Platform, View } from 'react-native';
-import NfcManager, { NfcTech, NfcTechNdef } from 'react-native-nfc-manager';
-const NFCScreen = () => {
-  const refRBSheet = useRef();
-console.log(refRBSheet);
-  useEffect(() => {
-    async function initNFC() {
-      try {
-        await NfcManager.start();
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Alert, Platform } from 'react-native';
+import NfcManager, { Ndef, NfcTech } from 'react-native-nfc-manager';
+import CryptoJS from "react-native-crypto-js";
 
-        NfcManager.setEventListener(NfcTech.Ndef, async (tag) => {
-          if (tag.ndefMessage) {
-            const textData = tag.ndefMessage[0].payload;
-            const text = textData ? NfcManager.parseUri(textData) : null;
-            if (text) {
-              // Faire quelque chose avec les données lues
-              Alert.alert('Données NFC lues', text);
-              console.log(text);
-            }
-          }
-        });
+NfcManager.start();
 
-        NfcManager.setEventListener(NfcTech.Ndef, (tag) => console.log(`Tag with id ${tag.id} entered the field`));
+function NFCScanner() {
+  const [isValable, setIsvalable] = useState(null);
+  const [userData, setUserData] = useState([]);
 
-        NfcManager.setEventListener(NfcTech.Ndef, (tag) => console.log(tag));
+  async function readNdef() {
+    await NfcManager.requestTechnology(NfcTech.Ndef)
+    try {
+      // Vérification de l'intégrité de la carte
+      const tag = await NfcManager.ndefHandler.getNdefMessage()
+      const decrypted = CryptoJS.AES.decrypt(tag.ndefMessage[0].payload.toString(), "S3cr3tK3y");
+      // const cipherText = Ndef.text.decodePayload(decrypted)
+      // const uid = bytes.toString(CryptoJS.enc.)
 
-        NfcManager.setEventListener(NfcTech.Ndef, () => NfcManager.requestTechnology(NfcTechNdef));
-      } catch (ex) {
-        console.warn(ex);
-        NfcManager.cancelTechnologyRequest();
-      }
-    }
-
-    initNFC();
-
-    return () => {
-      NfcManager.setEventListener(NfcTech.Ndef, null);
-      NfcManager.setEventListener(NfcTech.Ndef, null);
-      NfcManager.setEventListener(NfcTech.Ndef, null);
+    console.log(tag.ndefMessage[0].payload.toString());
+    //   if (uid.length >= 32) {
+    //     fetch(`http://fongo.artrevolutionlabel.com/api/etudiants/${uid}`)
+    //     .then(response => {
+    //       if (!response.ok) {
+    //         throw new Error('Network response failed');
+    //       }
+    //         return response.json();
+    //       })
+    //     .then(data => {
+    //       if (data.data) {
+    //         setUserData(data);
+    //         setIsvalable(data.data["valable"]);
+    //       } else {
+    //         Alert.alert("Carte invalide");
+    //       }
+    //     })
+    //       .catch(err => {
+    //         Alert.alert("Erreur de réseau. Veuillez vérifier votre connexion.");
+    //       });
+    //    } else {
+    //     Alert.alert("Carte invalide ou identifiant modifié");
+    //    }
+    } catch (ex) {
+     console.log("je suis",ex);
+    } finally {
       NfcManager.cancelTechnologyRequest();
-    };
-  }, []);
+    }
+    
+  }
 
   useEffect(() => {
     async function checkNFCEnabled() {
-      
       const isEnabled = await NfcManager.isEnabled();
-      console.log(isEnabled)
+      console.log(isEnabled);
       if (!isEnabled) {
         if (Platform.OS === 'ios') {
           Alert.alert(
             'NFC désactivé',
-            'Activer NFC dans les paramètres pour utiliser cette fonctionnalité.'
+            'Veuillez activer NFC dans les paramètres pour utiliser cette fonctionnalité.'
           );
         } else {
           Alert.alert(
@@ -70,9 +75,8 @@ console.log(refRBSheet);
     checkNFCEnabled();
   }, []);
 
-  return (
-   <Text style={{justifyContent:"center", alignItems:"center", color:"white"}}>scan ...</Text>
-  )
-};
+readNdef()
+  return null;
+}
 
-export default NFCScreen;
+export default NFCScanner;

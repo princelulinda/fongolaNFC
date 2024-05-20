@@ -1,30 +1,31 @@
-import { LinearGradient } from 'expo-linear-gradient';
-import LottieView from 'lottie-react-native';
+// import { LinearGradient } from 'expo-linear-gradient';
+// import LottieView from 'lottie-react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import {View, Button, Text, StyleSheet, Image} from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import BottomSheet from '../../component/BottomSheet';
-import Sound from '../../component/Sounds';
-import { Audio } from 'expo-av';
+// import BottomSheet from '../../component/BottomSheet';
+// import Sound from '../../component/Sounds';
+// import { Audio } from 'expo-av';
 
 const HomeScreen= () => {
   const refRBSheet = useRef();
-  const [sound, setSound] = useState();
-  async function playSound() {
+  // const [sound, setSound] = useState();
+  // async function playSound() {
 
-    const { sound } = await Audio.Sound.createAsync( require('../../../assets/sounds/short-success-sound.mp3')
-    );
-    setSound(sound);
-    await sound.playAsync();
-  }
+  //   const { sound } = await Audio.Sound.createAsync( require('../../../assets/sounds/short-success-sound.mp3')
+  //   );
+  //   setSound(sound);
+  //   await sound.playAsync();
+  // }
 
-  useEffect(() => {
-    return sound
-      ? () => {
-          sound.unloadAsync();
-        }
-      : undefined;
-  }, [sound]);
+  // useEffect(() => {
+  //   return sound
+  //     ? () => {
+  //         sound.unloadAsync();
+  //       }
+  //     : undefined;
+  // }, [sound]);
 
   return (
     <View style={styles.contener}>
@@ -33,12 +34,11 @@ const HomeScreen= () => {
         style={styles.button}
         onPress={() =>{
           refRBSheet.current.open()
-          playSound()
         }}
       >
         <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>scan card</Text>
       </TouchableOpacity>
-      <BottomSheet refRBSheet={refRBSheet} />
+      <BottomSheet refRBSheet={refRBSheet}  />
     </View>
   );
 
