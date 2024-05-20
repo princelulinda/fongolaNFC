@@ -2,18 +2,21 @@ import {StyleSheet, Text, View} from 'react-native'
 import WelcomeScreen from './src/screens/WelcomeScreen/WelcomeScreen'
 import HomeScreen from './src/screens/HomeScreen/HomeScreen'
 import NavigationScreen from './src/navigation/NavigationScreen'
+import NFCScreen from './src/component/test'
 
 
 export default function App(){
 return(
-<View style={styles.container}>
-<NavigationScreen/>
-</View>
-)
+    <View style={styles.container}>
+     <NavigationScreen/> 
+    </View>
+    )
 }
 
+
+
 const styles = StyleSheet.create({
-container:{
-flex:1,
-}
+    container:{
+        flex:1,
+    }
 })

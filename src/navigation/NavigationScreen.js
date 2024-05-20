@@ -5,6 +5,8 @@ import HomeScreen from '../screens/HomeScreen/HomeScreen'
 import WelcomeScreen from '../screens/WelcomeScreen/WelcomeScreen'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
+import SelectOptions from '../screens/selectOptionScreen'
+import WriteNFCPage from '../component/WritecardNfc/WriteCardNf'
 
 const Stack = createStackNavigator()
 
@@ -12,6 +14,7 @@ const NavigationScreen = () => {
   return (
    <NavigationContainer>
     <Stack.Navigator>
+      <Stack.Screen name='select' component={WriteNFCPage} options={{headerShown:false}}/>
       <Stack.Screen name="Welcome" component={WelcomeScreen} options={{headerShown:false}}/>
       <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
       {/* <Stack.Screen name="Onbording" component={Onbording} options={{headerShown:false}}/> */}

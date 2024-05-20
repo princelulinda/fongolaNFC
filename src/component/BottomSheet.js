@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Pressable } from 'react-native'
 import React from 'react'
 import RBSheet from 'react-native-raw-bottom-sheet'
 import LottieView from 'lottie-react-native'
-import { LinearGradient } from 'expo-linear-gradient'
-import NFCScreen from './test'
+// import Lottie from 'react-lottie-player'
+// import LinearGradient from 'react-native-linear-gradient'
+import NFCScanner from './test'
+
 
 const BottomSheet = ({refRBSheet}) => {
   return (
@@ -17,6 +19,12 @@ const BottomSheet = ({refRBSheet}) => {
       draggableIcon: {
         backgroundColor: '#000',
       },
+      container:{
+        backgroundColor:"#1a2a3c",
+        borderTopEndRadius:20,
+        borderTopStartRadius:20,
+        height:"40%"
+      }
     }}
     customModalProps={{
       animationType: 'slide',
@@ -24,22 +32,21 @@ const BottomSheet = ({refRBSheet}) => {
     }}
     customAvoidingViewProps={{
       enabled: false,
-    }}>
-         <LinearGradient
-    colors={[ '#a7c6c5',
-    '#92b6c2',
-    '#88a4be',
-    '#8c90b3',
-    '#957a9d',]}
-    style={[styles.scanAnimation]} 
-    start={{ x: 0.5, y: 0.5 }} 
-    end={{ x: 1, y: 1 }} 
-    children={<View
-        >
-        <LottieView source={require('../../assets/lottie/scanAnimation.json')} autoPlay loop />
-        <NFCScreen/>
-      </View>}
-  /> 
+    }}
+    children={
+      <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
+              <LottieView source={require("../../assets/lottie/scanAnimation.json")} style={{height:200, width:200}}
+              autoPlay
+              loop
+              />
+              <Text style={styles.title}>Placer la carte derrier télephone pour scanner...</Text>
+      <Pressable style={styles.button}>
+           <Text>Cancel</Text>
+      </Pressable>
+      <NFCScanner/>
+      </View>
+    }
+>
   </RBSheet>
   )
 }
@@ -55,10 +62,16 @@ const styles = StyleSheet.create({
       shadowColor: '#000',
     }
     ,
+    title: {
+      fontSize: 12,
+      marginBottom: 20,
+      width:200,
+      textAlign:"center"
+    },
     button:{
-        borderStyle:"solid", borderWidth:1  , borderColor:"#0b22e6",
+        borderStyle:"solid", borderWidth:1  , borderColor:"#ddd",
      borderRadius:10, padding:10, alignItems: 'center', justifyContent: 'center',
-     width: 150, color: '#0b22e6', marginTop: 60,
+     width: 150, color: '#ddd', marginTop: 10,
     },
     contener: {
       flex: 1,

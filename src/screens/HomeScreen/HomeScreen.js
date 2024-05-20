@@ -3,12 +3,13 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {View, Button, Text, StyleSheet, Image} from 'react-native';
 import { TouchableOpacity } from 'react-native';
+import BottomSheet from '../../component/BottomSheet';
 // import BottomSheet from '../../component/BottomSheet';
 // import Sound from '../../component/Sounds';
 // import { Audio } from 'expo-av';
 
 const HomeScreen= () => {
-  // const refRBSheet = useRef();
+  const refRBSheet = useRef();
   // const [sound, setSound] = useState();
   // async function playSound() {
 
@@ -31,13 +32,13 @@ const HomeScreen= () => {
         <Image source={require('../../../assets/homescan.png')} style={styles.image}/>
       <TouchableOpacity 
         style={styles.button}
-        // onPress={() =>{
-        //   /
-        // }}
+        onPress={() =>{
+          refRBSheet.current.open()
+        }}
       >
         <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>scan card</Text>
       </TouchableOpacity>
-      {/* <BottomSheet refRBSheet={refRBSheet} /> */}
+      <BottomSheet refRBSheet={refRBSheet}  />
     </View>
   );
 
